@@ -1,0 +1,21 @@
+@use 'src/styles/vars';
+
+.header {
+  display: flex;
+  border: 2px solid vars.$border;
+  padding: 20px;
+
+  .menu{
+    text-transform: uppercase;
+
+    a{
+      margin-right: 20px;
+    }
+
+    a.menu-link--active{
+      color: vars.$primary;
+
+    }
+    
+  }
+}

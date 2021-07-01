@@ -1,0 +1,43 @@
+@use 'src/styles/vars';
+
+.form {
+  width: 100%;
+  display: flex;
+
+  &__input {
+    display: inline-block;
+    width: 90%;
+    border: none;
+    padding: 0 1rem;
+    font-size: 1rem;
+    vertical-align: middle;
+  }
+
+  &__submit {
+    border: none;
+    display: inline-block;
+    width: 10%;
+    color: vars.$primary;
+    background-color: white;
+    vertical-align: middle;
+    transition: color 0.3s;
+    border: 2px solid white;
+
+    &:hover {
+      color: vars.$secondary;
+    }
+  }
+}
+
+@media screen and ( max-width: 640px) {
+  .form{
+    width: auto;
+    &__input{
+      width: 85%;
+    }
+    &__submit{
+      width: 15%;
+    }
+  }
+}
+

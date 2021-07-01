@@ -1,0 +1,22 @@
+@use 'reset';
+@use 'vars';
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+h2{
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-bottom: 35px;
+}
+body {
+  font-family: sans-serif;
+  background-color: vars.$light;
+}
+
+.main {
+  border: 2px solid vars.$border;
+  margin-top: 15px;
+  padding: 20px;
+}

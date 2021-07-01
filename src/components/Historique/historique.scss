@@ -1,0 +1,16 @@
+@use 'src/styles/vars';
+
+.historique {
+  .historique_conversations li.is_active{
+    //color: vars.$primary;
+  }
+  .historique_messages{
+    background: vars.$primary;
+    padding: 20px;
+    margin: 30px;
+  }
+  li{
+    margin: 15px 0;
+    cursor: pointer;
+  }
+}
