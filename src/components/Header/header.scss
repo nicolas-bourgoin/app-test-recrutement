@@ -2,20 +2,20 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   border: 2px solid vars.$border;
   padding: 20px;
 
   .menu{
     text-transform: uppercase;
+    padding: 10px;
 
     a{
       margin-right: 20px;
     }
-
     a.menu-link--active{
       color: vars.$primary;
-
     }
-    
   }
 }

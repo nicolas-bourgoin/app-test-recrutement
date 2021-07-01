@@ -5,7 +5,9 @@ import {
   GET_CONVERSATIONS,
   GET_CONVERSATIONS_SUCCESS,
   GET_MESSAGES_SUCCESS,
-
+  POST_CONVERSATION_SUCCESS,
+  TOGGLE_CONVERSATION,
+  CHANGE_NAME_CONSEILLER,
 } from 'src/store/actions';
 
 import dateTime from 'src/selectors/dateTime';
@@ -13,9 +15,11 @@ import dateTime from 'src/selectors/dateTime';
 const initialState = {
   loading: false,
   inputValue: '',
+  inputNameConseiller: '',
   conversations: [],
   messages: [],
   isActive: false,
+  isOpenNewConversation: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,14 +41,25 @@ const reducer = (state = initialState, action) => {
         messages: action.messages,
         isActive: true,
       };
-    // lorsque l'utilisateur tape dans le champ controlé
+    case POST_CONVERSATION_SUCCESS:
+      return {
+        ...state,
+        conversations: action.conversations,
+      };
+    case TOGGLE_CONVERSATION:
+      return {
+        ...state,
+        isOpenNewConversation: !state.isOpenNewConversation,
+      };
     case CHANGE_TEXT_INPUT:
-      // objectif
-      // je souhaite renvoyer un nouveau state
-      // je vais remplacer la valeur de inputValue par la nouvelle valeur
-      return { // je renvoie un nouvel objet
-        ...state, // je recopie l'ancien state grace au spread operator
+      return {
+        ...state,
         inputValue: action.newValue,
+      };
+    case CHANGE_NAME_CONSEILLER:
+      return {
+        ...state,
+        inputNameConseiller: action.newValue,
       };
     // j'envoie un message dans le websocket
     case SEND_MESSAGE:

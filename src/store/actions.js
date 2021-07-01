@@ -8,6 +8,10 @@ export const GET_CONVERSATIONS = 'GET_CONVERSATIONS';
 export const GET_CONVERSATIONS_SUCCESS = 'GET_CONVERSATIONS_SUCCESS';
 export const GET_MESSAGES_BY_CONVERSATION = 'GET_MESSAGES_BY_CONVERSATION';
 export const GET_MESSAGES_SUCCESS = 'GET_MESSAGES_SUCCESS';
+export const POST_NEW_CONVERSATION = 'POST_NEW_CONVERSATION';
+export const POST_CONVERSATION_SUCCESS = 'POST_CONVERSATION_SUCCESS';
+export const TOGGLE_CONVERSATION = 'TOGGLE_CONVERSATION';
+export const CHANGE_NAME_CONSEILLER = 'CHANGE_NAME_CONSEILLER';
 
 // action qui déclenche la requete
 export const getConversations = () => ({
@@ -31,14 +35,35 @@ export const getMessagesSuccess = (messages) => ({
   type: GET_MESSAGES_SUCCESS,
   messages: messages,
 });
- 
+
+// action lorsqu'on clique sur créer une conversation
+export const newConversation = () => ({
+  type: POST_NEW_CONVERSATION,
+});
+
+// action lorsque la réponse de l'api arrive
+export const postConversationSuccess = () => ({
+  type: POST_CONVERSATION_SUCCESS,
+});
+
+
+export const toggleConversation = () => ({
+  type: TOGGLE_CONVERSATION,
+});
+
+export const changeNameConseiller = (newValue) => (
+  {
+    type: CHANGE_NAME_CONSEILLER,
+    newValue,
+  }
+);
+
+
 
 export const changeTextInput = (newValue) => (
   {
     type: CHANGE_TEXT_INPUT,
     newValue,
-    // note : shorthand property
-    // equivalent de newValue: newValue
   }
 );
 

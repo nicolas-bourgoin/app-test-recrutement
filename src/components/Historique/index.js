@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes, { number } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './historique.scss';
 
@@ -39,7 +39,7 @@ Historique.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       content: PropTypes.string.isRequired,
-      conversationId: number.isRequired,
+      conversationId: PropTypes.number.isRequired,
     }),
   ).isRequired,
 };
