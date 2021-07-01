@@ -17,43 +17,10 @@
     font-size: 0.8em;
     margin-left: 5px;
   }
-  &--mine {
-    text-align: right;
-    margin-right: 0;
-    
-    .message__author {
-      padding-left: 0;
-    }
-    .message__content {
-      background: #f2f2f2;
-      // la fleche de la bulle du message
-      &::before {
-        right: 30px;
-        border-left: 7px solid transparent;
-        border-right: 7px solid #f2f2f2;
-        border-top: 7px solid transparent;
-        border-bottom: 7px solid #f2f2f2;
-      }
-    }
-  }
-
+  
   &__content {
-    // la fleche de la bulle du message
-    &::before {
-      content: '';
-      position: absolute;
-      display: block;
-      top: 26px;
-      border-left: 7px solid transparent;
-      border-right: 7px solid white;
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid white;
-    }
-    // afin que le message
-    // ne prenne que la place requise
-    // par son contenu
     display: inline-block;
-    background-color: white;
+    background-color:vars.$primary;
     margin-top: 0.5rem;
     padding: 1rem 2rem;
     border-radius: 25px;

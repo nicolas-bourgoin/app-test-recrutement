@@ -5,8 +5,7 @@ import NewConversation from 'src/components/Newconversation';
 import {
   toggleConversation,
   changeNameConseiller,
-  onSubmit,
-  submitNewConversation
+  newConversation,
 } from 'src/store/actions';
 
 const mapStateToProps = (state) => ({
@@ -19,16 +18,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(toggleConversation());
   },
   onChangeNameConseiller: (event) => {
-    console.log('change name conseiller');
     dispatch(changeNameConseiller(event.target.value));
-  }
-  // envoi du formulaire
-  //onSubmit: (event) => {
-    // on ne veut pas que la page se recharge
-  //  event.preventDefault();
-  //  console.log('je veux créer une nouvelle conversation');
-    //dispatch(submitNewConversation());
-  //},
+  },
+  onSubmitConversation: (event) => {
+    event.preventDefault();
+    console.log('je veux créer une nouvelle conversation');
+    dispatch(newConversation());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewConversation);

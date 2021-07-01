@@ -1,11 +1,17 @@
 import axios from 'axios';
 import {
   GET_CONVERSATIONS,
+  GET_MESSAGES,
   getConversationsSuccess,
+  getAllMessagesSuccess,
   GET_MESSAGES_BY_CONVERSATION,
   getMessagesSuccess,
   POST_NEW_CONVERSATION,
   postConversationSuccess,
+  SEND_MESSAGE,
+  postMessageSuccess,
+  ARCHIVE_CONVERSATION,
+  putConversationSuccess,
 } from 'src/store/actions';
 
 const conversation = (store) => (next) => (action) => {
@@ -15,6 +21,19 @@ const conversation = (store) => (next) => (action) => {
       axios.get('http://localhost:3000/conversations')
         .then((response) => {
           store.dispatch(getConversationsSuccess(response.data));
+          console.log(response.data);
+        })
+        .catch((error) => console.log('error', error));
+
+      next(action);
+      break;
+    }
+    case GET_MESSAGES: {
+      // traitement de la requete get pour obtenir tous les messages
+      axios.get('http://localhost:3000/messages')
+        .then((response) => {
+          store.dispatch(getAllMessagesSuccess(response.data));
+          console.log(response.data);
         })
         .catch((error) => console.log('error', error));
 
@@ -35,11 +54,60 @@ const conversation = (store) => (next) => (action) => {
     }
     case POST_NEW_CONVERSATION: {
       // traitement de la requete post pour créer une nouvelle conversation
-      axios.post('http://localhost:3000/conversations')
+      const state = store.getState();
+
+      const postConversationRequest = {
+        method: 'post',
+        url: 'http://localhost:3000/conversations',
+        data: {
+          name: state.inputNameConseiller,
+        },
+      };
+      axios(postConversationRequest)
         .then((response) => {
-          console.log('je veux poster une nouvelle conversation');
-          console.log(response.data);
           store.dispatch(postConversationSuccess(response.data));
+        })
+        .catch((error) => console.log('error', error));
+
+      next(action);
+      break;
+    }
+    case SEND_MESSAGE: {
+      const state = store.getState();
+      const idConversation = state.conversationIdActive;
+      const postMessageRequest = {
+        method: 'post',
+        url: `http://localhost:3000/conversations/${idConversation}/messages`,
+        data: {
+          content: state.inputValue,
+        },
+      };
+      axios(postMessageRequest)
+        .then((response) => {
+          console.log('message posté');
+          console.log(response.data);
+          store.dispatch(postMessageSuccess(response.data));
+        })
+        .catch((error) => console.log('error', error));
+
+      next(action);
+      break;
+    }
+    case ARCHIVE_CONVERSATION: {
+      const state = store.getState();
+      const idConversation = state.conversationIdActive;
+      const putMessageRequest = {
+        method: 'put',
+        url: `http://localhost:3000/conversations/${idConversation}`,
+        data: {
+          archived: true,
+        },
+      };
+      axios(putMessageRequest)
+        .then((response) => {
+          console.log('mconversation modifiée');
+          console.log(response.data);
+          store.dispatch(putConversationSuccess(response.data));
         })
         .catch((error) => console.log('error', error));
 

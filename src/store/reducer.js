@@ -1,23 +1,28 @@
 import {
   CHANGE_TEXT_INPUT,
-  ADD_MESSAGE,
   SEND_MESSAGE,
   GET_CONVERSATIONS,
   GET_CONVERSATIONS_SUCCESS,
+  GET_ALL_MESSAGES_SUCCESS,
   GET_MESSAGES_SUCCESS,
   POST_CONVERSATION_SUCCESS,
   TOGGLE_CONVERSATION,
   CHANGE_NAME_CONSEILLER,
+  GET_MESSAGES_BY_CONVERSATION_OPEN,
+  POST_MESSAGE_SUCCESS,
+  PUT_CONVERSATION_SUCCESS,
 } from 'src/store/actions';
 
-import dateTime from 'src/selectors/dateTime';
-
 const initialState = {
-  loading: false,
+  loading: true,
   inputValue: '',
   inputNameConseiller: '',
   conversations: [],
+  conversationIdActive: null,
+  conversationConseillerAtif: null,
   messages: [],
+  displayHistoryMessages: false,
+  displayMessages: false,
   isActive: false,
   isOpenNewConversation: false,
 };
@@ -35,16 +40,30 @@ const reducer = (state = initialState, action) => {
         conversations: action.conversations,
         loading: false,
       };
+    case GET_ALL_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        messages: action.messages,
+      };
     case GET_MESSAGES_SUCCESS:
       return {
         ...state,
         messages: action.messages,
         isActive: true,
+        displayHistoryMessages: true,
       };
     case POST_CONVERSATION_SUCCESS:
       return {
         ...state,
-        conversations: action.conversations,
+        conversations: [
+          ...state.conversations,
+          {
+            id: action.id,
+            name: action.name,
+            archived: action.archived,
+          },
+        ],
+        isOpenNewConversation: !state.isOpenNewConversation,
       };
     case TOGGLE_CONVERSATION:
       return {
@@ -61,30 +80,38 @@ const reducer = (state = initialState, action) => {
         ...state,
         inputNameConseiller: action.newValue,
       };
-    // j'envoie un message dans le websocket
+    case GET_MESSAGES_BY_CONVERSATION_OPEN:
+      return {
+        ...state,
+        displayMessages: true,
+        conversationIdActive: action.idConversation,
+      };
     case SEND_MESSAGE:
       return {
         ...state,
         inputValue: '',
       };
-    // je recois un message
-    case ADD_MESSAGE:
-      // je renvoie un nouveau state
+    case POST_MESSAGE_SUCCESS:
       return {
         ...state,
-        messages: [ // pour les messages, on recrée un nouveau tableau
-          // on recopie l'ancien tableau de messages
+        messages: [
           ...state.messages,
-          // on ajoute, a la fin du tableau, le nouveau message
-          // pas besoin de le faire transiter dans l'action :
-          // on l'a déja dans le state !
-          // je construis un nouvel objet qui contient
-          // le message que j'ajoute
           {
-            id: action.message.id,
-            author: action.message.author,
-            content: action.message.content,
-            createdAt: dateTime(),
+            id: action.id,
+            content: action.content,
+            conversationId: action.conversationId,
+          },
+        ],
+      };
+    case PUT_CONVERSATION_SUCCESS:
+      return {
+        ...state,
+        conversations: [
+          ...state.conversations,
+          {
+            id: action.id,
+            name: action.name,
+            archived: action.archived,
           },
         ],
       };

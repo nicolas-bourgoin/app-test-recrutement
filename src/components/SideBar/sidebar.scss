@@ -1,0 +1,18 @@
+@use 'src/styles/vars';
+
+.sidebar{
+  width: 25%;
+
+  .sidebar_conservations_open li{
+    border: 1px solid vars.$border;
+    text-align: center;
+    padding: 15px;
+    margin: 0 0 15px 0;
+    cursor: pointer;
+  }
+  .sidebar_conservations_open li:hover{
+    color: vars.$light;
+    background: vars.$primary;
+  }
+}
+

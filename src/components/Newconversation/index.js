@@ -5,7 +5,7 @@ import './newconversation.scss';
 
 const Newconversation = ({
   isOpen,
-  onSubmit,
+  onSubmitConversation,
   onNewConversationToggle,
   nameConseiller,
   onChangeNameConseiller,
@@ -27,7 +27,7 @@ const Newconversation = ({
     && (
     <form
       className="newconversation__form"
-      onSubmit={onSubmit}
+      onSubmit={onSubmitConversation}
     >
       <input
         className="newconversation__input"
@@ -51,7 +51,7 @@ Newconversation.propTypes = {
   nameConseiller: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onChangeNameConseiller: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onSubmitConversation: PropTypes.func.isRequired,
   onNewConversationToggle: PropTypes.func.isRequired,
 };
 

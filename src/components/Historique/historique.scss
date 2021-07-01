@@ -1,6 +1,8 @@
 @use 'src/styles/vars';
 
 .historique {
+  width: 100%;
+  
   .historique_conversations li.is_active{
     //color: vars.$primary;
   }

@@ -6,6 +6,13 @@
   background-color: vars.$light;
   position: relative;
   padding: 15px;
+
+  .main{
+    display: flex;
+  }
+  .content_messages{
+    width: 75%;
+  }
 }
 
 @media screen and ( max-width: 640px) {

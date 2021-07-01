@@ -5,23 +5,41 @@ export const CHANGE_TEXT_INPUT = 'CHANGE_TEXT_INPUT';
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const GET_CONVERSATIONS = 'GET_CONVERSATIONS';
+export const GET_MESSAGES = 'GET_MESSAGES';
 export const GET_CONVERSATIONS_SUCCESS = 'GET_CONVERSATIONS_SUCCESS';
 export const GET_MESSAGES_BY_CONVERSATION = 'GET_MESSAGES_BY_CONVERSATION';
+export const GET_ALL_MESSAGES_SUCCESS = 'GET_ALL_MESSAGES_SUCCESS';
 export const GET_MESSAGES_SUCCESS = 'GET_MESSAGES_SUCCESS';
 export const POST_NEW_CONVERSATION = 'POST_NEW_CONVERSATION';
 export const POST_CONVERSATION_SUCCESS = 'POST_CONVERSATION_SUCCESS';
 export const TOGGLE_CONVERSATION = 'TOGGLE_CONVERSATION';
 export const CHANGE_NAME_CONSEILLER = 'CHANGE_NAME_CONSEILLER';
+export const GET_MESSAGES_BY_CONVERSATION_OPEN = 'GET_MESSAGES_BY_CONVERSATION_OPEN';
+export const POST_MESSAGE_SUCCESS = 'POST_MESSAGE_SUCCESS';
+export const ARCHIVE_CONVERSATION = 'ARCHIVE_CONVERSATION';
+export const PUT_CONVERSATION_SUCCESS = 'PUT_CONVERSATION_SUCCESS';
+
 
 // action qui déclenche la requete
 export const getConversations = () => ({
   type: GET_CONVERSATIONS,
 });
 
+// action qui déclenche la requete
+export const getMessages = () => ({
+  type: GET_MESSAGES,
+});
+
 // action lorsque la réponse de l'api arrive
 export const getConversationsSuccess = (conversations) => ({
   type: GET_CONVERSATIONS_SUCCESS,
   conversations: conversations,
+});
+
+// action lorsque la réponse de l'api arrive
+export const getAllMessagesSuccess = (messages) => ({
+  type: GET_ALL_MESSAGES_SUCCESS,
+  messages: messages,
 });
 
 // action qui déclenche la requete
@@ -41,47 +59,59 @@ export const newConversation = () => ({
   type: POST_NEW_CONVERSATION,
 });
 
-// action lorsque la réponse de l'api arrive
-export const postConversationSuccess = () => ({
-  type: POST_CONVERSATION_SUCCESS,
-});
-
-
 export const toggleConversation = () => ({
   type: TOGGLE_CONVERSATION,
 });
 
-export const changeNameConseiller = (newValue) => (
-  {
-    type: CHANGE_NAME_CONSEILLER,
-    newValue,
-  }
-);
+export const changeNameConseiller = (newValue) => ({
+  type: CHANGE_NAME_CONSEILLER,
+  newValue,
+});
 
+// action lorsque la réponse de l'api arrive
+export const postConversationSuccess = (conversation) => ({
+  type: POST_CONVERSATION_SUCCESS,
+  id: conversation.id,
+  name: conversation.name,
+  archived: conversation.archived,
+});
 
+// action qui déclenche la requete
+export const getMessagesByConversationOpen = (idConversation) => ({
+  type: GET_MESSAGES_BY_CONVERSATION_OPEN,
+  idConversation,
+});
 
-export const changeTextInput = (newValue) => (
-  {
-    type: CHANGE_TEXT_INPUT,
-    newValue,
-  }
-);
+export const changeTextInput = (newValue) => ({
+  type: CHANGE_TEXT_INPUT,
+  newValue,
+});
 
-// addMessage : ajoute un message a la liste
-// appelé lorsque on recoit un message
-// message est un objet contenant : { author, content, id}
-// en provenance du serveur (websocket)
 export const addMessage = (message) => ({
   type: ADD_MESSAGE,
   message: message,
 });
 
-// envoie un message au serveur
-// pas besoin de parametres pour cette action
-// les infos sont déja dans le store :
-// - nickname
-// - texte du message
 export const sendMessage = () => ({
   type: SEND_MESSAGE,
 });
 
+// action lorsque la réponse de l'api arrive
+export const postMessageSuccess = (message) => ({
+  type: POST_MESSAGE_SUCCESS,
+  id: message.id,
+  content: message.content,
+  conversationId: message.conversationId,
+});
+
+export const getAarchiveConversation = () => ({
+  type: ARCHIVE_CONVERSATION,
+});
+
+// action lorsque la réponse de l'api arrive
+export const putConversationSuccess = (conversation) => ({
+  type: PUT_CONVERSATION_SUCCESS,
+  id: conversation.id,
+  name: conversation.name,
+  archived: conversation.archived,
+});
