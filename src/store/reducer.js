@@ -12,19 +12,21 @@ import {
   POST_MESSAGE_SUCCESS,
   PATCH_CONVERSATION_SUCCESS,
   CHANGE_STATE_CONVERSATIONS,
+  CHANGE_STATE_MESSAGES,
 } from 'src/store/actions';
 
+// state initial
 const initialState = {
   loading: true,
   inputValue: '',
   inputNameConseiller: '',
   conversations: [],
   conversationIdActive: null,
+  conversationHistoriqueId: null,
   conversationConseillerAtif: null,
   messages: [],
   displayHistoryMessages: false,
   displayMessages: false,
-  isActive: false,
   isOpenNewConversation: false,
 };
 
@@ -49,8 +51,7 @@ const reducer = (state = initialState, action) => {
     case GET_MESSAGES_SUCCESS:
       return {
         ...state,
-        messages: action.messages,
-        isActive: true,
+        conversationHistoriqueId: action.idConversation,
         displayHistoryMessages: true,
       };
     case POST_CONVERSATION_SUCCESS:
@@ -112,6 +113,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         displayMessages: false,
+      };
+    case CHANGE_STATE_MESSAGES:
+      return {
+        ...state,
+        messages: state.messages,
       };
     default:
       return state;

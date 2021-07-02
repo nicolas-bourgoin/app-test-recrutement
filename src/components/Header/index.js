@@ -6,7 +6,7 @@ import NewConversation from 'src/containers/NewConversation';
 
 import './header.scss';
 
-const Header = ({changeStateConversations}) => {
+const Header = ({ changeStateConversations, changeStateMessages }) => {
   const location = useLocation();
   const currentPath = location.pathname;
   return (
@@ -25,6 +25,7 @@ const Header = ({changeStateConversations}) => {
           activeClassName="menu-link--active"
           className="menu-link"
           exact
+          onClick={changeStateMessages}
           to="/conversations"
         >
           Conversations
@@ -38,6 +39,7 @@ const Header = ({changeStateConversations}) => {
 
 Header.propTypes = {
   changeStateConversations: PropTypes.func.isRequired,
+  changeStateMessages: PropTypes.func.isRequired,
 };
 
 

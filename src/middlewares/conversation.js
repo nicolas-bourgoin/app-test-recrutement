@@ -43,7 +43,8 @@ const conversation = (store) => (next) => (action) => {
       const { idConversation } = action;
       axios.get(`http://localhost:3000/conversations/${idConversation}/messages`)
         .then((response) => {
-          store.dispatch(getMessagesSuccess(response.data));
+          console.log(response.data);
+          store.dispatch(getMessagesSuccess(response.data, idConversation));
         })
         .catch((error) => console.log('error', error));
 

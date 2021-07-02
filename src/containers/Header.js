@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
 import Header from 'src/components/Header';
-import { changeStateConversations } from 'src/store/actions';
+import { changeStateConversations, changeStateMessages } from 'src/store/actions';
 
 const mapDispatchToProps = (dispatch) => ({
   changeStateConversations: () => {
     dispatch(changeStateConversations());
+  },
+  changeStateMessages: () => {
+    dispatch(changeStateMessages());
   },
 });
 

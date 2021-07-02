@@ -10,9 +10,15 @@
     margin: 0 0 15px 0;
     cursor: pointer;
   }
+  .sidebar_conservations_open li.is_active{
+    background: vars.$primary;
+    color: #fff;
+  }
   .sidebar_conservations_open li:hover{
     color: vars.$light;
     background: vars.$primary;
   }
+
+
 }
 

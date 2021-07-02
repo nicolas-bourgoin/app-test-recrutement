@@ -19,6 +19,7 @@ export const POST_MESSAGE_SUCCESS = 'POST_MESSAGE_SUCCESS';
 export const ARCHIVE_CONVERSATION = 'ARCHIVE_CONVERSATION';
 export const PATCH_CONVERSATION_SUCCESS = 'PATCH_CONVERSATION_SUCCESS';
 export const CHANGE_STATE_CONVERSATIONS = 'CHANGE_STATE_CONVERSATIONS';
+export const CHANGE_STATE_MESSAGES = 'CHANGE_STATE_MESSAGES';
 
 // action qui déclenche la requete
 export const getConversations = () => ({
@@ -49,9 +50,10 @@ export const getMessagesByConversation = (idConversation) => ({
 });
 
 // action lorsque la réponse de l'api arrive
-export const getMessagesSuccess = (messages) => ({
+export const getMessagesSuccess = (messages, idConversation) => ({
   type: GET_MESSAGES_SUCCESS,
   messages: messages,
+  idConversation: idConversation,
 });
 
 // action lorsqu'on clique sur créer une conversation
@@ -117,3 +119,6 @@ export const changeStateConversations = () => ({
   type: CHANGE_STATE_CONVERSATIONS,
 });
 
+export const changeStateMessages = () => ({
+  type: CHANGE_STATE_MESSAGES,
+});

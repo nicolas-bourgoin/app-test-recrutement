@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import './historique.scss';
 
 const Historique = ({
-  conversations, loadMessagesByConversation, messagesArchives, isActive, displayHistoryMessages
+  conversations, loadMessagesByConversation, messagesArchives, isActive, displayHistoryMessages,
 }) => (
   <div className="historique">
     <ul className="historique_conversations">
       <h2>Historique des conversations</h2>
       {conversations.map((conversation) => (
-        <li className={isActive ? 'is_active' : ''} id={conversation.id} onClick={loadMessagesByConversation} key={conversation.id}>
+        <li className={isActive == conversation.id ? 'is_active' : ''} id={conversation.id} onClick={loadMessagesByConversation} key={conversation.id}>
           Conversation de {conversation.name}
         </li>
       ))}

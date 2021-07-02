@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import './sidebar.scss';
 
 const SideBar = ({
-  conversations, isActive, openMessagerie, loadConversations,
+  conversations, isActive, openMessagerie,
 }) => (
   <div className="sidebar">
     <ul className="sidebar_conservations_open">
       <h2>Conversations en cours</h2>
       {conversations.map((conversation) => (
         <li
-          className={isActive ? 'is_active' : ''}
+          className={isActive == conversation.id ? 'is_active' : ''}
           data-conseiller={conversation.name}
           id={conversation.id}
           onClick={openMessagerie}
@@ -33,7 +33,6 @@ SideBar.propTypes = {
   ).isRequired,
   openMessagerie: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
-  loadConversations: PropTypes.func.isRequired,
 };
 
 export default SideBar;

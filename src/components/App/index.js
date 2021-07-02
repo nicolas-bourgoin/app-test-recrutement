@@ -1,8 +1,8 @@
-// == Import npm
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 
+// import composants
 import Form from 'src/containers/Form';
 import Messages from 'src/containers/Messages';
 import Header from 'src/containers/Header';
@@ -13,8 +13,11 @@ import Spinner from 'src/components/Spinner';
 
 import './app.scss';
 
-// == Composant
-const App = ({ loadConversations, loading, displayMessages, loadMessages }) => {
+// Composant principal
+const App = ({
+  loadConversations, loading, displayMessages, loadMessages,
+}) => {
+  // appel aux messages et aux conversations à l'initialisation
   useEffect(() => {
     loadConversations();
     loadMessages();

@@ -4,8 +4,8 @@ import { getMessagesByConversation } from 'src/store/actions';
 
 const mapStateToProps = (state) => ({
   conversations: state.conversations.filter(((conversation) => conversation.archived === true)),
-  messagesArchives: state.messages,
-  isActive: state.isActive,
+  messagesArchives: state.messages.filter((message) => message.conversationId == state.conversationHistoriqueId),
+  isActive: state.conversationHistoriqueId,
   displayHistoryMessages: state.displayHistoryMessages,
 });
 

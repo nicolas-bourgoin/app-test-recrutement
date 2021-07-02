@@ -4,6 +4,7 @@ import { getMessagesByConversationOpen, getConversations} from 'src/store/action
 
 const mapStateToProps = (state) => ({
   conversations: state.conversations.filter(((conversation) => conversation.archived === false)),
+  isActive: state.conversationIdActive,
 });
 
 const mapDispatchToProps = (dispatch) => ({
