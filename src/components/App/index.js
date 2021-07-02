@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Form from 'src/containers/Form';
 import Messages from 'src/containers/Messages';
-import Header from 'src/components/Header';
+import Header from 'src/containers/Header';
 import Error from 'src/components/Error';
 import Historique from 'src/containers/Historique';
 import Sidebar from 'src/containers/Sidebar';

@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import NewConversation from 'src/containers/NewConversation';
 
 import './header.scss';
 
-const Header = () => {
+const Header = ({changeStateConversations}) => {
   const location = useLocation();
   const currentPath = location.pathname;
   return (
@@ -15,6 +16,7 @@ const Header = () => {
           activeClassName="menu-link--active"
           className="menu-link"
           exact
+          onClick={changeStateConversations}
           to="/"
         >
           Accueil
@@ -33,5 +35,10 @@ const Header = () => {
     </header>
   );
 };
+
+Header.propTypes = {
+  changeStateConversations: PropTypes.func.isRequired,
+};
+
 
 export default Header;

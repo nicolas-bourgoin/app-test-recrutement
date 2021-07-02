@@ -22,7 +22,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSubmitConversation: (event) => {
     event.preventDefault();
-    console.log('je veux créer une nouvelle conversation');
     dispatch(newConversation());
   },
 });

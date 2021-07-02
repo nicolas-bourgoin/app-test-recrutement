@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Header from 'src/components/Header';
-import { newConversation } from 'src/store/actions';
+import { changeStateConversations } from 'src/store/actions';
 
 const mapDispatchToProps = (dispatch) => ({
-  handleConversation: () => {
-    dispatch(newConversation());
+  changeStateConversations: () => {
+    dispatch(changeStateConversations());
   },
 });
 

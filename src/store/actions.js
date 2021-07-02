@@ -17,8 +17,8 @@ export const CHANGE_NAME_CONSEILLER = 'CHANGE_NAME_CONSEILLER';
 export const GET_MESSAGES_BY_CONVERSATION_OPEN = 'GET_MESSAGES_BY_CONVERSATION_OPEN';
 export const POST_MESSAGE_SUCCESS = 'POST_MESSAGE_SUCCESS';
 export const ARCHIVE_CONVERSATION = 'ARCHIVE_CONVERSATION';
-export const PUT_CONVERSATION_SUCCESS = 'PUT_CONVERSATION_SUCCESS';
-
+export const PATCH_CONVERSATION_SUCCESS = 'PATCH_CONVERSATION_SUCCESS';
+export const CHANGE_STATE_CONVERSATIONS = 'CHANGE_STATE_CONVERSATIONS';
 
 // action qui déclenche la requete
 export const getConversations = () => ({
@@ -77,9 +77,10 @@ export const postConversationSuccess = (conversation) => ({
 });
 
 // action qui déclenche la requete
-export const getMessagesByConversationOpen = (idConversation) => ({
+export const getMessagesByConversationOpen = (idConversation, nameConseiller) => ({
   type: GET_MESSAGES_BY_CONVERSATION_OPEN,
   idConversation,
+  nameConseiller,
 });
 
 export const changeTextInput = (newValue) => ({
@@ -97,21 +98,22 @@ export const sendMessage = () => ({
 });
 
 // action lorsque la réponse de l'api arrive
-export const postMessageSuccess = (message) => ({
+export const postMessageSuccess = (messages) => ({
   type: POST_MESSAGE_SUCCESS,
-  id: message.id,
-  content: message.content,
-  conversationId: message.conversationId,
+  messages: messages,
 });
 
-export const getAarchiveConversation = () => ({
+export const getArchiveConversation = () => ({
   type: ARCHIVE_CONVERSATION,
 });
 
 // action lorsque la réponse de l'api arrive
-export const putConversationSuccess = (conversation) => ({
-  type: PUT_CONVERSATION_SUCCESS,
-  id: conversation.id,
-  name: conversation.name,
-  archived: conversation.archived,
+export const patchConversationSuccess = (conversations) => ({
+  type: PATCH_CONVERSATION_SUCCESS,
+  conversations: conversations,
 });
+
+export const changeStateConversations = () => ({
+  type: CHANGE_STATE_CONVERSATIONS,
+});
+

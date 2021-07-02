@@ -11,7 +11,7 @@ const Historique = ({
       <h2>Historique des conversations</h2>
       {conversations.map((conversation) => (
         <li className={isActive ? 'is_active' : ''} id={conversation.id} onClick={loadMessagesByConversation} key={conversation.id}>
-          {conversation.name}
+          Conversation de {conversation.name}
         </li>
       ))}
     </ul>

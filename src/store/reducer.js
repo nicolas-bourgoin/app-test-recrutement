@@ -10,7 +10,8 @@ import {
   CHANGE_NAME_CONSEILLER,
   GET_MESSAGES_BY_CONVERSATION_OPEN,
   POST_MESSAGE_SUCCESS,
-  PUT_CONVERSATION_SUCCESS,
+  PATCH_CONVERSATION_SUCCESS,
+  CHANGE_STATE_CONVERSATIONS,
 } from 'src/store/actions';
 
 const initialState = {
@@ -64,6 +65,7 @@ const reducer = (state = initialState, action) => {
           },
         ],
         isOpenNewConversation: !state.isOpenNewConversation,
+        inputNameConseiller: '',
       };
     case TOGGLE_CONVERSATION:
       return {
@@ -85,6 +87,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         displayMessages: true,
         conversationIdActive: action.idConversation,
+        conversationConseillerAtif: action.nameConseiller,
+        displayHistoryMessages: false,
       };
     case SEND_MESSAGE:
       return {
@@ -94,26 +98,20 @@ const reducer = (state = initialState, action) => {
     case POST_MESSAGE_SUCCESS:
       return {
         ...state,
-        messages: [
-          ...state.messages,
-          {
-            id: action.id,
-            content: action.content,
-            conversationId: action.conversationId,
-          },
-        ],
+        messages: action.messages,
       };
-    case PUT_CONVERSATION_SUCCESS:
+    case PATCH_CONVERSATION_SUCCESS:
       return {
         ...state,
-        conversations: [
-          ...state.conversations,
-          {
-            id: action.id,
-            name: action.name,
-            archived: action.archived,
-          },
-        ],
+        conversations: action.conversations,
+        conversationIdActive: null,
+        conversationConseillerAtif: null,
+        displayMessages: false,
+      };
+    case CHANGE_STATE_CONVERSATIONS:
+      return {
+        ...state,
+        displayMessages: false,
       };
     default:
       return state;

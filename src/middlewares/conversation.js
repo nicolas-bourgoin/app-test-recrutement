@@ -11,7 +11,7 @@ import {
   SEND_MESSAGE,
   postMessageSuccess,
   ARCHIVE_CONVERSATION,
-  putConversationSuccess,
+  patchConversationSuccess,
 } from 'src/store/actions';
 
 const conversation = (store) => (next) => (action) => {
@@ -21,7 +21,6 @@ const conversation = (store) => (next) => (action) => {
       axios.get('http://localhost:3000/conversations')
         .then((response) => {
           store.dispatch(getConversationsSuccess(response.data));
-          console.log(response.data);
         })
         .catch((error) => console.log('error', error));
 
@@ -33,7 +32,6 @@ const conversation = (store) => (next) => (action) => {
       axios.get('http://localhost:3000/messages')
         .then((response) => {
           store.dispatch(getAllMessagesSuccess(response.data));
-          console.log(response.data);
         })
         .catch((error) => console.log('error', error));
 
@@ -55,7 +53,6 @@ const conversation = (store) => (next) => (action) => {
     case POST_NEW_CONVERSATION: {
       // traitement de la requete post pour créer une nouvelle conversation
       const state = store.getState();
-
       const postConversationRequest = {
         method: 'post',
         url: 'http://localhost:3000/conversations',
@@ -84,7 +81,6 @@ const conversation = (store) => (next) => (action) => {
       };
       axios(postMessageRequest)
         .then((response) => {
-          console.log('message posté');
           console.log(response.data);
           store.dispatch(postMessageSuccess(response.data));
         })
@@ -97,7 +93,7 @@ const conversation = (store) => (next) => (action) => {
       const state = store.getState();
       const idConversation = state.conversationIdActive;
       const putMessageRequest = {
-        method: 'put',
+        method: 'patch',
         url: `http://localhost:3000/conversations/${idConversation}`,
         data: {
           archived: true,
@@ -105,9 +101,8 @@ const conversation = (store) => (next) => (action) => {
       };
       axios(putMessageRequest)
         .then((response) => {
-          console.log('mconversation modifiée');
           console.log(response.data);
-          store.dispatch(putConversationSuccess(response.data));
+          store.dispatch(patchConversationSuccess(response.data));
         })
         .catch((error) => console.log('error', error));
 

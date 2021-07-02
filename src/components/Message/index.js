@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import './message.scss';
 
 const Message = ({
-  conversationId, content,
+  content, conversationConseiller,
 }) => (
   <div className="messages">
-    <div className="message__author">{conversationId}</div>
+    <div className="message__author">{conversationConseiller}</div>
     <p className="message__content">{content}</p>
   </div>
 );
 
 Message.propTypes = {
   content: PropTypes.string.isRequired,
-  conversationId: PropTypes.number.isRequired,
+  conversationConseiller: PropTypes.string.isRequired,
 };
 
 export default Message;

@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import Message from 'src/containers/Message';
 import './messages.scss';
 
-const Messages = ({ msgList, conversationIdActive, archiveConversation }) => {
+const Messages = ({
+  msgList,
+  conversationIdActive,
+  conversationConseillerActif,
+  archiveConversation,
+}) => {
   const listRef = useRef(null);
 
   // est appelé lorsque la propriété msgList change
@@ -16,8 +21,10 @@ const Messages = ({ msgList, conversationIdActive, archiveConversation }) => {
       ref={listRef}
       className="messages-list"
       id={conversationIdActive}
+      data-conseiller={conversationConseillerActif}
     >
-      <div onClick={archiveConversation} className="archive_conversation">X</div>
+      <div title="archiver la conversation" onClick={archiveConversation} className="archive_conversation">X</div>
+      <h3>{conversationConseillerActif}</h3>
       {msgList.map((message) => (
         <Message
           conversationId={message.conversationId}
@@ -38,6 +45,7 @@ Messages.propTypes = {
   ).isRequired,
   conversationIdActive: PropTypes.number.isRequired,
   archiveConversation: PropTypes.func.isRequired,
+  conversationConseillerActif: PropTypes.string.isRequired,
 };
 
 export default Messages;
